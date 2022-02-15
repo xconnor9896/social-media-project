@@ -19,7 +19,7 @@ export const HeaderMessage = () => {
       icon={isSignup ? "settings" : "privacy"}
       header={isSignup ? "Get Started Here" : "Welcome Back"}
       content={
-        isSignup ? "Creat New Account" : "Login with Email and Password"
+        isSignup ? "Create New Account" : "Login with Email and Password"
       }
     />
   )

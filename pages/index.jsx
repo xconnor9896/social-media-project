@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import { parseCookies } from "nookies";
+import axios from "axios";
 
 const index = ({user}) => {
 
@@ -30,11 +32,11 @@ export default index;
 //   );
 // }
 
-// index.getInitialProps = async (ctx) => {
-//   const cookie = parseCookies(ctx);
-//   const res = await axios.get(
-//     'https://jsonplaceholder.typicode.com/posts'
-//   )
-//   // console.log(ctx);
-//   return { posts: res.data, token: cookie.token };
-// };
+index.getInitialProps = async (ctx) => {
+  const cookie = parseCookies(ctx);
+  const res = await axios.get(
+    'https://jsonplaceholder.typicode.com/posts'
+  )
+  // console.log(ctx);
+  return { posts: res.data, token: cookie.token };
+};

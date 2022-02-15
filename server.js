@@ -30,8 +30,10 @@ app.use(fileUpload({ useTempFiles: true }));
 //* ~~~~~ ROUTERS ~~~~~*/
 const userRoute = require('./server/routes/userRoutes');
 const authRoute = require('./server/routes/authRoutes');
+const searchRoute = require('./server/routes/search');
 const uploadRoute = require('./server/routes/uploadPicRoute');
 
+app.use('/api/v1/search', searchRoute);
 app.use('/api/v1/user', userRoute);
 app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/upload', uploadRoute);
