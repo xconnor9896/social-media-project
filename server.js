@@ -24,19 +24,24 @@ const nextApp = next({ dev });
 const handler = nextApp.getRequestHandler();
 
 //* MIDDLEWARES */ 
+const { authMiddleware } = require('./server/middleware/auth')
+
 app.use(express.json());
 app.use(fileUpload({ useTempFiles: true }));
+
 
 //* ~~~~~ ROUTERS ~~~~~*/
 const userRoute = require('./server/routes/userRoutes');
 const authRoute = require('./server/routes/authRoutes');
 const searchRoute = require('./server/routes/search');
 const uploadRoute = require('./server/routes/uploadPicRoute');
+const postRoute = require('./server/routes/postRoute');
 
-app.use('/api/v1/search', searchRoute);
 app.use('/api/v1/user', userRoute);
 app.use('/api/v1/auth', authRoute);
+app.use('/api/v1/search', searchRoute);
 app.use('/api/v1/upload', uploadRoute);
+app.use('/api/v1/posts', authMiddleware, postRoute);
 
 connectDB();
 
