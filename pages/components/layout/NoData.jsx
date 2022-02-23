@@ -1,15 +1,15 @@
 import React from 'react';
-import {Message, Button} from 'semantic-ui-react';
+import { Message, Button } from 'semantic-ui-react';
 
 export const NoProfilePost = () => {
   return <>
-    <Message 
+    <Message
       info
       icon='meh'
       header="Sorry!"
       content="This person hasn't posted anything yet! You should follow them to see if they do!"
     />
-    <Button 
+    <Button
       icon="long arrow alternate left"
       content="Go Back"
       as="a"
@@ -18,17 +18,27 @@ export const NoProfilePost = () => {
   </>
 }
 
-export const NoFollowData = () => {
-  return <Message 
-    info
-    icon=""
-    header=""
-    content=""
-  />;
+export const NoFollowData = ({ profileName, followersComponent = true, followingComponent = true }) => {
+  <>
+    {followersComponent && (
+      <Message
+        icon="user outline"
+        info
+        content={`${profileName.split(" ")[0]} has no followers.`}
+      />
+    )}
+    {followingComponent && (
+      <Message
+        icon="user outline"
+        info
+        content={`${profileName.split(" ")[0]} isn't following anyone.`}
+      />
+    )}
+  </>
 }
 
 export const NoMessages = () => {
-  return <Message 
+  return <Message
     info
     icon='telegram plane'
     header="Sorry!"
@@ -38,7 +48,7 @@ export const NoMessages = () => {
 
 export const NoPosts = () => {
   return (
-    <Message 
+    <Message
       info
       icon='meh'
       header="Hey!"

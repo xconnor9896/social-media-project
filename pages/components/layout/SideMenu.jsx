@@ -11,7 +11,7 @@ const SideMenu = ({ user: { email, unreadNotification, unreadMessage, username }
     <>
 
       <List
-        style={{ marginTop: '2rem', marginBottom: '1rem' }}
+        // style={{ marginTop: '2rem', marginBottom: '1rem' }}
         size="big"
         verticalAlign="middle"
         selection
