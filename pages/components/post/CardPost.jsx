@@ -21,7 +21,7 @@ import { deletePost, likePost } from '../../util/postActions';
 
 const CardPost = ({ post, user, setPosts, setShowToastr }) => {
   const [likes, setLikes] = useState(post.likes);
-  const isLiked = likes.find((like) => like.user !== user._id);
+  const isLiked = likes.find((like) => like.user === user._id);
 
   const [comments, setComments] = useState(post.comments);
   const [error, setError] = useState(null);
@@ -87,7 +87,73 @@ const CardPost = ({ post, user, setPosts, setShowToastr }) => {
               </Popup>
             </>
           )}
+
+          <Card.Header>
+            <Link href={`/${post.user.username}`}>
+              <a>{post.user.name}</a>
+            </Link>
+          </Card.Header>
+
+          <Card.Meta>
+            {calculateTime(post.createdAt)}
+          </Card.Meta>
+
+          {post.location && <Card.Meta content={post.location} />}
+
+          <Card.Description
+            style={{ fontSize: '1.75rem', letterSpacing: '0.2px' }}
+          >
+            {post.text}
+          </Card.Description>
+
         </Card.Content>
+
+        <Card.Content extra>
+          <Icon
+            name={isLiked ? 'heart' : 'heart outline'}
+            color={isLiked ? 'red' : undefined}
+            style={{ cursor: "pointer" }}
+            onClick={() => likePost(post._id, user._id, setLikes, !isLiked)}
+          />
+          <LikesList
+            postId={post._id}
+            trigger={
+              likes.length && (
+                <span className="spanLikesList">
+                  {`${likes.length} ${likes.length === 1 ? "like" : "likes"}`}
+                </span>
+              )
+            }
+          />
+          <Icon
+            name='comment outline'
+            style={{ marginleft: '7px' }}
+            color='blue'
+          />
+          {comments.length &&
+            comments.map((comment, i) => (
+              i < 3 && (
+                <PoatComments
+                  key={comment._id}
+                  comment={comment}
+                  postId={post._id}
+                  user={user}
+                  setComments={setComments}
+                />
+              )
+            ))
+          }
+          {comments.length > 3 && (
+            <Button
+              content='View More'
+              color='blue'
+              basic
+              circular
+              onClick={() => setShowModal(true)}
+            />
+          )}
+        </Card.Content>
+
       </Card>
     </Segment>
   </>

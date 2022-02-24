@@ -127,6 +127,7 @@ const deletePost = async (req, res) => {
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 const likePost = async (req, res) => {
+  console.log('Liked post');
   try {
     const { postId } = req.params;
     const { userId } = req;
