@@ -18,6 +18,7 @@ import ImageModal from './ImageModal';
 import NoImageModal from './NoImageModal';
 import calculateTime from '../../util/calculateTime';
 import { deletePost, likePost } from '../../util/postActions';
+import CommentInputField from './CommentInputField';
 
 const CardPost = ({ post, user, setPosts, setShowToastr }) => {
   const [likes, setLikes] = useState(post.likes);
@@ -133,7 +134,7 @@ const CardPost = ({ post, user, setPosts, setShowToastr }) => {
           {comments.length &&
             comments.map((comment, i) => (
               i < 3 && (
-                <PoatComments
+                <PostComments
                   key={comment._id}
                   comment={comment}
                   postId={post._id}
@@ -152,10 +153,16 @@ const CardPost = ({ post, user, setPosts, setShowToastr }) => {
               onClick={() => setShowModal(true)}
             />
           )}
+          <Divider hidden />
+          <CommentInputField
+            user={user}
+            postId={post._id}
+            setComments={setComments}
+          />
         </Card.Content>
-
       </Card>
     </Segment>
+    <Divider hidden />
   </>
 }
 

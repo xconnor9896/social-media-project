@@ -1,54 +1,57 @@
 import { useEffect, useState } from "react";
 import { parseCookies } from "nookies";
 import axios from "axios";
-import { baseURL } from './util/auth';
+import { baseURL } from "./util/auth";
 import { NoPosts } from "./components/layout/NoData";
 import { Segment } from "semantic-ui-react";
-import CreatePost from './components/post/CreatePost';
-import CardPost from './components/post/CardPost';
+import CreatePost from "./components/post/CreatePost";
+import CardPost from "./components/post/CardPost";
 
 const index = ({ user, postData, errorLoading }) => {
-
   const [posts, setPosts] = useState(postData);
   const [showToastr, setShowToastr] = useState(false);
 
   //* ~~~~~ USEEFFECTS ~~~~~ */
 
   useEffect(() => {
-    document.title = `Welcome ${user.name.split(" ")[0]}`
+    document.title = `Welcome ${user.name.split(" ")[0]}`;
   }, []);
 
   useEffect(() => {
-    showToastr && setTimeout(() => setShowToastr(false), 3000)
-  }, [showToastr])
+    showToastr && setTimeout(() => setShowToastr(false), 3000);
+  }, [showToastr]);
 
-  if (!posts || errorLoading) return <NoPosts />
+  if (!posts || errorLoading) return <NoPosts />;
 
   return (
     <>
       {/*SHOWTOASTER THINGS*/}
       <Segment>
         <CreatePost user={user} setPosts={setPosts} />
-        {posts.map((post => (
-          <CardPost 
-          user={user}
-          key={post._id}
-          post={post}
-          setPosts={setPosts}
-          setShowToastr={setShowToastr}
-          />
-        )))}
+        {!posts || errorLoading ? (
+          <NoPosts />
+        ) : (
+          posts.map((post) => (
+            <CardPost
+              user={user}
+              key={post._id}
+              post={post}
+              setPosts={setPosts}
+              setShowToastr={setShowToastr}
+            />
+          ))
+        )}
       </Segment>
     </>
-  )
-}
+  );
+};
 
 index.getInitialProps = async (ctx) => {
   try {
     const { token } = parseCookies(ctx);
     const res = await axios.get(`${baseURL}/api/v1/posts`, {
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -57,7 +60,7 @@ index.getInitialProps = async (ctx) => {
     console.log(error);
     return { errorLoading: true };
   }
-}
+};
 
 export default index;
 
