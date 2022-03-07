@@ -68,7 +68,7 @@ export const submitNewPost = async (
   setError
 ) => {
   try {
-    await postAxios.post("/", { text, location, picURL });
+    const res = await postAxios.post("/", { text, location, picURL });
     setPosts((prev) => [res.data, ...prev]);
     setNewPost({ text: "", location: "" });
   } catch (error) {

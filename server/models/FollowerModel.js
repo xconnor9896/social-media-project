@@ -14,7 +14,7 @@ const FollowerSchema = new Schema({
       },
     },
   ],
-  followeing: [
+  following: [
     {
       user: {
         type: Schema.Types.ObjectId,
