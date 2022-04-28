@@ -123,7 +123,7 @@ const postLoginUser = async (req, res) => {
       return res.status(401).send(`Your credentials are invalid.`);
 
     const chatModel = await ChatModel.findOne({ user: user._id });
-    if (!chatModel) await new ChatModel({ user: user._id });
+    if (!chatModel) await new ChatModel({ user: user._id }).save();
 
     const payload = { userId: user._id };
     jwt.sign(

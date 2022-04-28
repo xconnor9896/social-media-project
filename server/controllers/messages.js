@@ -22,7 +22,7 @@ const getChats = async (req, res) => {
 
     return res.status(200).json(chatsToBeSent);
   } catch (error) {
-    console.log(eror);
+    console.log(error);
     return res.status(500).send("Error at controllers/getChats");
   }
 };
@@ -37,7 +37,7 @@ const getUserInfo = async (req, res) => {
       .status(200)
       .json({ name: user.name, profilePicURL: user.profilePicURL });
   } catch (error) {
-    console.log(eror);
+    console.log(error);
     return res.status(500).send("Error at controllers/getUserInfo");
   }
 };
@@ -66,7 +66,7 @@ const deleteChat = async (req, res) => {
 
     return res.status(200).send("Chat deleted successfully");
   } catch (error) {
-    console.log(eror);
+    console.log(error);
     return res.status(500).send("Error at controllers/deleteChat");
   }
 };

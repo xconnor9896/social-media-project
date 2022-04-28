@@ -30,7 +30,7 @@ const SideMenu = ({ user: { email, unreadNotification, unreadMessage, username }
           </List.Item>
         </Link>
 <Divider hidden />
-        <Link href={'/message'}>
+        <Link href={'/messages'}>
           <List.Item active={isActive('/messages')}>
             <Icon
               name={unreadMessage ? "hand point right" : "mail outline"}

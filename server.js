@@ -47,14 +47,14 @@ app.use("/api/v1/profile", authMiddleware, profileRoute);
 app.use("/api/v1/messages", authMiddleware, messagesRoute);
 
 //* ~~~~~ SOCKETS ~~~~~ */
-const server = require('http').Server(app);
-const io = require('socket.io')(server);
+// const { Server } = require("socket.io");
+// const io = new Server(3001);
 
-io.on("connect", (socket) => {
-  socket.on("pingServer", (data) => {
-    console.log(data);
-  });
-});
+// io.on("connect", (socket) => {
+//   socket.on("pingServer", (data) => {
+//     console.log(data);
+//   });
+// });
 
 connectDB();
 
